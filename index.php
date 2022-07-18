@@ -57,6 +57,7 @@
     ?>
       <div class="card">
         <div class="card-body">
+          
           <p class="id-cod">ID:<?php echo $fila['id'] ?></p>
           <h2 class="card-title"><?php echo $fila['palabra'] ?></h2>
           <p class="card-text"><?php echo $fila['descripcion'] ?></p>
