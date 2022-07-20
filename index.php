@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,11 +20,20 @@
     <h1>EL DICCIONARIO DE PAULA</h1>
   </header>
 
+<!-- Botón Inicio Sesión: -->
+<section class="login">
+
+  <form method="post" action="./pages/login.php">
+    <div>
+      <input type="submit" name="inicioSesion" value="Iniciar Sesion">
+    </div>
+  </form>
+
+</section>
+
   <!-- Formulario -->
-    
-    <section class="buscador content">
-  
-    <form method="post">
+  <section class="buscador content">
+      <form method="post">
         <label for="palabra" class="search-txt">
           Buscar Palabra:
           <input type="text" name="word">
@@ -37,7 +46,7 @@
 
     <!-- Mostrar Resultados -->
 <br>
-    <section  class="container d-flex justify-content-around">
+    <section  class="container contenedor-mostrar">
     <?php 
     // establecemos la conexión
     require "db/conexion.php";
@@ -45,19 +54,21 @@
     ?>
     <?php if(isset($_POST[btnBuscar])){ 
     $word = $_POST['word'];
+    
     if($word === ""){
-      echo "No has introducido ningún valor";
-      exit;
+      $sql = "SELECT * FROM palabras";
+    }else {
+      $sql = "SELECT id, palabra, descripcion FROM palabras WHERE palabra LIKE '%$word%'";
     }
-    $sql = "SELECT id, palabra, descripcion FROM palabras WHERE palabra LIKE '%$word%'";
+
     $resQuery = mysqli_query($conn, $sql);
 
     if ($resQuery) {
       while ($fila = mysqli_fetch_array($resQuery, MYSQLI_ASSOC)) {
     ?>
-      <div class="card">
+      <div class="card tarjeta">
         <div class="card-body">
-          
+          <img src="" alt="Aqu´i va una imagen relacionada con la palabra">
           <p class="id-cod">ID:<?php echo $fila['id'] ?></p>
           <h2 class="card-title"><?php echo $fila['palabra'] ?></h2>
           <p class="card-text"><?php echo $fila['descripcion'] ?></p>
