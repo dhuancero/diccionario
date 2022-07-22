@@ -4,7 +4,7 @@
       <a class="navbar-brand" href="./">MI PRIMER DICCIONARIO</a>
       <ul class="nav justify-content-end nav-fill">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../index.php">Inicio</a>
+          <a class="nav-link" aria-current="page" href="../index.php">Inicio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./pages/personajes.php">Personajes</a>

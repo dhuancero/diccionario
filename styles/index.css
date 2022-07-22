@@ -1,9 +1,8 @@
-.contenedor-mostrar {
+/* .contenedor-mostrar {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  /* justify-content: center; */
   align-content: space-between;
 }
 .card {
@@ -16,8 +15,8 @@
   flex-direction: column;
 }
 
-/* eSTILOS PARA LA IMAGEN */
 .card-body img {
   height: 200px;
   border: solid 1px;
 }
+ */

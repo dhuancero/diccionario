@@ -6,7 +6,12 @@ cabecera("Login");
 ?>
 
 <body>
+  <!-- HEADER -->
+  <?php include_once "../components/header.php"; ?>
+  <!-- HEADER FIN -->
+
   <main class="container">
+
     <?php
     if (isset($_POST["inicioSesion"])) {
     ?>
