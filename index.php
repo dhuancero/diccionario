@@ -1,95 +1,79 @@
+<?php session_start();
+if (isset($_SESSION['username'])) {
+  $sesicion_username = $_SESSION['username'];
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diccionario Paula</title>
+<?php
+include_once "./components/head.php";
+cabecera("Diccionario Paula");
+?>
 
-  <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<body>
+  <?php
+  // establecemos la conexión
+  require_once "db/conexion.php";
+  $conn = conexion();
+  ?>
+  <main>
+    <?php include_once "./components/header.php"; ?>
 
-<link href="styles/index.css" rel="stylesheet" >
-
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-</head>
-<body class="text-center" >
-  <main class="container">
-  <header>
-    <h1>EL DICCIONARIO DE PAULA</h1>
-  </header>
-
-<!-- Botón Inicio Sesión: -->
-<section class="login">
-
-  <form method="post" action="./pages/login.php">
-    <div>
-      <input type="submit" name="inicioSesion" value="Iniciar Sesion">
-    </div>
-  </form>
-
-</section>
-
-  <!-- Formulario -->
-  <section class="buscador content">
+    <!-- Formulario -->
+    <section class="buscador container">
       <form method="post">
-        <label for="palabra" class="search-txt">
+        <label for="palabra" class="search-txt form-label">
           Buscar Palabra:
-          <input type="text" name="word">
+          <input type="text" name="word" class="form-control">
         </label>
         <div class="search-btn">
-          <input type="submit" value="BUSCAR" name="btnBuscar">
+          <input type="submit" class="btn btn-primary" value="BUSCAR" name="btnBuscar">
         </div>
       </form>
-    </section>  
+    </section>
 
     <!-- Mostrar Resultados -->
-<br>
-    <section  class="container contenedor-mostrar">
-    <?php 
-    // establecemos la conexión
-    require "db/conexion.php";
-    $conn = conexion();
-    ?>
-    <?php if(isset($_POST[btnBuscar])){ 
-    $word = $_POST['word'];
-    
-    if($word === ""){
-      $sql = "SELECT * FROM palabras";
-    }else {
-      $sql = "SELECT id, palabra, descripcion FROM palabras WHERE palabra LIKE '%$word%'";
-    }
+    <br>
+    <section class="container contenedor-mostrar">
+      <?php if (isset($_POST["btnBuscar"])) {
+        $word = $_POST['word'];
 
-    $resQuery = mysqli_query($conn, $sql);
+        if ($word === "") {
+          $sql = "SELECT * FROM palabras";
+        } else {
+          $sql = "SELECT id, palabra, descripcion FROM palabras WHERE palabra LIKE '%$word%'";
+        }
 
-    if ($resQuery) {
-      while ($fila = mysqli_fetch_array($resQuery, MYSQLI_ASSOC)) {
-    ?>
-      <div class="card tarjeta">
-        <div class="card-body">
-          <img src="" alt="Aqu´i va una imagen relacionada con la palabra">
-          <p class="id-cod">ID:<?php echo $fila['id'] ?></p>
-          <h2 class="card-title"><?php echo $fila['palabra'] ?></h2>
-          <p class="card-text"><?php echo $fila['descripcion'] ?></p>
-        </div>
-        <div>
-          Personajes:
-            Aquí se muestra el personaje o los personajes que intervienen en la viñeta.
-        </div>
-      </div>
+        $resQuery = mysqli_query($conn, $sql);
 
-    <?php
-          }    
+        if ($resQuery) {
+          while ($fila = mysqli_fetch_array($resQuery, MYSQLI_ASSOC)) {
+      ?>
+            <div class="card tarjeta">
+              <div class="card-body">
+                <img src="" alt="Aqu´i va una imagen relacionada con la palabra">
+                <p class="id-cod">ID:<?php echo $fila['id'] ?></p>
+                <h2 class="card-title"><?php echo $fila['palabra'] ?></h2>
+                <p class="card-text"><?php echo $fila['descripcion'] ?></p>
+              </div>
+              <div>
+                Personajes:
+                Aquí se muestra el personaje o los personajes que intervienen en la viñeta.
+              </div>
+            </div>
+
+        <?php
+          }
         } else {
           echo "<p class='fallo'>Error: $mensaje <br>" . mysqli_error($conn) . "</p>";
         }
-    ?>
-    <?php } 
-     mysqli_close($conn);?>
-      
+        ?>
+      <?php }
+      mysqli_close($conn); ?>
+
     </section>
   </main>
-  
+
 </body>
+
 </html>
