@@ -22,7 +22,7 @@ if (isset($_POST["registrar"])) {
   $stmt->execute();
   if ($stmt) {
     echo "Todo ha salido bien";
-    $_SESSION["username"] = $username;
+    $_SESSION["username"] = $name;
     header("Location: ../index.php?registrado");
   } else {
     echo "No se ha podido insertar registro";

@@ -1,7 +1,6 @@
 <?php
-include_once "../components/head.php";
-
 session_start();
+include_once "../components/head.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
