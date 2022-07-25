@@ -18,10 +18,29 @@ cabecera("Diccionario Paula");
   $conn = conexion();
   ?>
   <!-- HEADER -->
-  <?php include_once "./components/header.php"; ?>
+  <header>
+    <nav class="navbar navbar-dark bg-dark ">
+      <div class="container-fluid ">
+        <a class="navbar-brand" href="./">MI PRIMER DICCIONARIO</a>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link text-light" href="./">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="./pages/personajes.php">Personajes</a>
+          </li>
+        </ul>
+
+        <?php include_once "./components/sesion.php"; ?>
+        <!-- Aquí va inicio de sesion -->
+      </div>
+    </nav>
+  </header>
+
+
   <!-- HEADER FIN -->
 
-  <main class="container-xl mt-5">
+  <main class="container">
     <!-- Formulario -->
     <section class="buscador text-center m-5 ">
       <form method="post" class="">

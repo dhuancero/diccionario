@@ -8,6 +8,9 @@ if (isset($_POST["registrar"])) {
   $pass = $_POST["password"];
   $rePass = $_POST["re-pass"];
 
+  if ($name === "" && $email === "" && $username === "" && $pass === "" && $rePass === "") {
+    exit(header("Location: ../pages/registrar.php?msj=errorReg"));
+  }
   if ($pass === $rePass) {
     echo $pass;
     echo $rePass;

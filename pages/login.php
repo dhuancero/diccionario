@@ -13,11 +13,27 @@ cabecera("Login");
 
 <body>
   <!-- HEADER -->
-  <?php include_once "../components/header.php"; ?>
+  <header>
+    <nav class="navbar navbar-dark bg-dark ">
+      <div class="container-fluid ">
+        <a class="navbar-brand" href="./">MI PRIMER DICCIONARIO</a>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link text-light" href="../">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="./personajes.php">Personajes</a>
+          </li>
+        </ul>
+
+        <?php include_once "../components/sesion.php"; ?>
+        <!-- Aquí va inicio de sesion -->
+      </div>
+    </nav>
+  </header>
   <!-- HEADER FIN -->
 
   <main class="container">
-
     <?php
     if (isset($_POST["inicioSesion"])) {
       if (isset($sesicion_username)) {

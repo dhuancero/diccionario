@@ -10,34 +10,69 @@ cabecera("Registrar");
 
 <body>
   <!-- HEADER -->
-  <?php include_once "../components/header.php"; ?>
+  <header>
+    <nav class="navbar navbar-dark bg-dark ">
+      <div class="container-fluid ">
+        <a class="navbar-brand" href="./">MI PRIMER DICCIONARIO</a>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link text-light" href="../">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="./personajes.php">Personajes</a>
+          </li>
+        </ul>
+
+        <?php include_once "../components/sesion.php"; ?>
+        <!-- Aquí va inicio de sesion -->
+      </div>
+    </nav>
+  </header>
   <!-- HEADER FIN -->
 
-  <form action="../db/esRegistar.php" method="post" class="formRegis form">
-    <label for="name">
-      Nombre:
-      <input type="text" name="name" id="name">
-    </label>
-    <label for="email">
-      Email
-      <input type="email" name="email" id="email">
-    </label>
-    <label for="userName">
-      Nombre de Usuario:
-      <input type="text" name="userName" id="userName">
-    </label>
-    <label for="password">
-      Contraseña:
-      <input type="password" name="password" id="password">
-    </label>
-    <label for="repass">
-      Repetir contraseña:
-      <input type="password" name="re-pass" id="re-pass">
-    </label>
-    <div>
-      <input type="submit" class="btn btn-primary" name="registrar" value="REGISTRAR">
-    </div>
-  </form>
+
+  <main class="container-sm my-5" style="width:50%;">
+    <h2 class="text-center py-2">Darse de alta</h2>
+
+    <?php
+    if (isset($_GET['msj'])) {
+      if ($_GET['msj'] == 'errorReg') {
+        echo "Tiene que rellenar todos los campos";
+      }
+    }
+    ?>
+    <form action="../db/esRegistar.php" method="post" class="formRegis form-sm">
+
+      <div class="form-floating mb-3">
+        <input type="text" name="name" class="form-control" id="floatingInput" placeholder="Nombre completo">
+        <label for="floatingInput">Nombre:</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control" id="floatingInputValue" placeholder="nombre@correo.com">
+        <label for="floatingPassword">Correo electrónico:</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" name="userName" class="form-control" id="floatingInput" placeholder="Nombre de usuario">
+        <label for="floatingInput">Nombre de usuario:</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+        <label for="floatingPassword">Contraseña:</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="password" name="re-pass" class="form-control" id="floatingPassword" placeholder="Repite Contraseña">
+        <label for="floatingPassword">Repite Contraseña:</label>
+      </div>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <input type="submit" class="btn btn-primary btn-lg text-center" name="registrar" value="REGISTRAR">
+      </div>
+    </form>
+  </main>
+
 </body>
 
 </html>
