@@ -52,7 +52,7 @@ cabecera("Personajes");
                 <h5 class="card-title pb-2 title-personaje"><?php echo $personaje['nombre'] ?></h5>
                 <h6 class="card-subtitle mb-2 text-muted"><?php $personaje['id'] ?></h6>
                 <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                <a href="#" class="btn btn-sm text-center btn-outline-primary mr-2">Ver Palabras</a>
+                <a href="palabras.php?id=<?php echo $personaje['id'] ?>" class="btn btn-sm text-center btn-outline-primary mr-2">Ver Palabras</a>
               </div>
             </div>
           </div>

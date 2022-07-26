@@ -15,7 +15,7 @@
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Color</a></li>
+              <li><a class="dropdown-item" href="./pages/insertar-palabra.php?insert">Insertar palabra</a></li>
             </ul>
           </li>
         </ul>
