@@ -2,12 +2,11 @@
 session_start();
 if (isset($_SESSION['username'])) {
   $sesicion_username = $_SESSION['username'];
+} else {
+  header("Location: ../index.php");
 }
 include_once "../components/head.php";
 require_once "../db/conexion.php";
-if (!isset($_GET["insert"])) {
-  header("Location: ../index.php");
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -48,18 +47,18 @@ if (!isset($_GET["insert"])) {
         <label for="floatingInput">Palabra:</label>
       </div>
       <div class="form-floating mb-3">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+        <textarea class="form-control" name="descripcion" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
         <label for="floatingTextarea2">Descripción</label>
       </div>
 
       <div class="input-group mb-3">
-        <input type="file" class="form-control" name="images" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-        <button class="btn btn-outline-primary" type="button" id="inputGroupFileAddon04">Añadir</button>
+        <input type="file" class="form-control" name="imagen_palabra" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+        <!-- <button class="btn btn-outline-primary" type="button" id="inputGroupFileAddon04">Añadir</button> -->
       </div>
 
       <div class="form-control mb-3">
-        <label for="floatingInput">Personaje:</label>
-        <select class="form-select personaje-select" name="states[]" multiple="multiple" id="personaje-select" size="3">
+        <label for="id_label_multiple">Personaje:</label>
+        <select class="form-select personaje-select" name="states[]" multiple="multiple" id="id_label_multiple">
           <!-- <option value="vacio">Selecciona personaje/s:</option> -->
           <?php
           $conn = conexion();
@@ -72,18 +71,15 @@ if (!isset($_GET["insert"])) {
           }
           ?>
         </select>
+        <input type="hidden" id="val-person" name="val-person" value="">
+        <script defer src="../js/select-personajes.js" type="text/javascript">
+        </script>
       </div>
       <div class="d-grid gap-2 col-6 mx-auto">
         <input type="submit" class="btn btn-primary btn-lg text-center" name="registrar" value="REGISTRAR">
       </div>
     </form>
   </main>
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.personaje-select').select2();
-    });
-  </script>
 </body>
 
 </html>
