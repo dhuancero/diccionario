@@ -61,7 +61,7 @@ cabecera("Diccionario Paula");
           if ($word === "") {
             exit("Tienes que escribir una palabra");
           } else {
-            $sql = "SELECT id, palabra, descripcion FROM palabras WHERE palabra LIKE CONCAT('%',?,'%')";
+            $sql = "SELECT id, palabra, imagen, descripcion FROM palabras WHERE palabra LIKE CONCAT('%',?,'%')";
           }
 
           $sentencia = $conn->prepare($sql);
@@ -73,11 +73,13 @@ cabecera("Diccionario Paula");
           if (!$palabra) {
             exit("No hay resultados para ese palabra");
           }
+
         ?>
+
           <!-- <div class="col"> -->
           <div class="card tarjeta mb-4">
             <div class="card-body">
-              <img src="" class="card-img-top" alt="Aqu´i va una imagen relacionada con la palabra">
+              <img src="img/<?php echo $palabra['imagen'] ?>" width="500" class="card-img-top" alt="Aqu´i va una imagen relacionada con la palabra">
               <p class="id-cod">ID:<?php echo $palabra['id'] ?></p>
               <h2 class="card-title"><?php echo $palabra['palabra'] ?></h2>
               <p class="card-text"><?php echo $palabra['descripcion'] ?></p>

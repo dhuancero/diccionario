@@ -12,6 +12,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Configuración</a></li>
+              <li><a class="dropdown-item" href="#">Editar Personaje</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

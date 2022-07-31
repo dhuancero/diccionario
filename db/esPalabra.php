@@ -1,40 +1,39 @@
 <?php
 include_once "../functions/functions.php";
+include_once "conexion.php";
+
 if (isset($_POST["registrar"])) {
-  include_once "conexion.php";
+
+  //! Creamos la variable conexión
   $conn = conexion();
+
+  //! Recuperamos las variables y su valor.
   $palabra = $_POST["palabra"];
   $descripcion = $_POST["descripcion"];
   $numPersonajes = $_POST['val-person'];
-  $imagen_palabra = $_FILES["imagen_palabra"]["tmp_name"];
-  // Creamos la consulta de insersión preparada
+  $nombreImagen = addslashes($_FILES["imagen"]["name"]);
+  echo $nombreImagen;
+
+  //! Comprobamos que los campos tienen contenido
   if ($palabra === "" || $descripcion === "" || $numPersonajes === "") {
     exit(header("Location: ../pages/insertar-palabra.php?msj=errorReg"));
   }
 
-  $imgContent = addslashes(file_get_contents($imagen_palabra));
-  echo $_FILES["imagen_palabra"]["name"];
-
-  // COMPROBAMOS Y CONVERTIMOS LA IMAGEN EN bITS -> lONGbLOB
-  echo $imgContent . "-->";
-  printf($imgContent);
-  print_r($imgContent);
-  /* $check = getimagesize($_FILES['imagen_palabra']['tmp_name']);
-
-  if ($check !== false) {
-    $imagen_final = $_FILES["imagen_palabra"]["tmp_name"];
-  } else {
-    echo "Please select an image file to upload.";
+  //! Comprobamos que la imagen ha sido cargada
+  $nombreArchivo = ($nombreImagen !== "") ? $nombreImagen : "avatar_1.jpg";
+  $tmpImagen = $_FILES['imagen']['tmp_name'];
+  echo $tmpImagen . "<br>";
+  if ($tmpImagen !== "") {
+    move_uploaded_file(addslashes($tmpImagen), "../img/" . $nombreArchivo);
   }
- */
-
-
 
   //! PRIMERA CONSULTA: INSERTAR PALABRA.
-  /*   $sql_palabra = "INSERT INTO `palabras`(`palabra`, `imagen`, `descripcion`) VALUES (?,?,?)";
+  $sql_palabra = "INSERT INTO palabras(palabra, imagen, descripcion) VALUES (?,?,?)";
+
   // $sql = "INSERT INTO `usuarios`(`nombre`, `email`, `username`, `password`, `re-password`) VALUES (?,?,?,?,?)";
   $sentencia = $conn->prepare($sql_palabra);
-  $sentencia->bind_param('sbs', $palabra, $imgContent, $descripcion);
+  $sentencia->bind_param('sss', $palabra, $nombreImagen, $descripcion);
+
   $sentencia->execute();
   if ($sentencia) {
     echo "Todo ha salido bien";
@@ -45,8 +44,8 @@ if (isset($_POST["registrar"])) {
 
   $stmt->close();
   $db->close();
- */
-  //! PRIMERA CONSULTA: INSERTAR RELACIÓN.
+
+  //! SEGUNDA CONSULTA: INSERTAR RELACIÓN.
 
   $sql_select_personaje = "SELECT `id`, `nombre` FROM `personaje` WHERE `id` =" . $numPersonajes;
 
@@ -55,10 +54,20 @@ if (isset($_POST["registrar"])) {
 
   $sql_relacion = "INSERT INTO `relacion`(`id_palabra`, `id_personaje`) VALUES ()";
 
+  echo "<br><hr><br>";
 
   echo "Palabra: " . $palabra . "<br>";
+  echo "<br><hr><br>";
+
   // echo "state: " . $state . "<br>";
   echo "Descripción: " . $descripcion . "<br>";
+  echo "<br><hr><br>";
+
   echo "Imangen: " . $imgContent . "<br>";
+  echo "<br><hr><br>";
+
   echo "Personajes(por ID):" . $numPersonajes . "<br>";
+  echo "<br><hr><br>";
+
+  echo $_SERVER['DOCUMENT_ROOT'] . "<br>";
 }

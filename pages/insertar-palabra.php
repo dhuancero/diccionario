@@ -40,7 +40,7 @@ require_once "../db/conexion.php";
       }
     }
     ?>
-    <form action="../db/esPalabra.php" method="post" class="formRegis form">
+    <form action="../db/esPalabra.php" method="post" class="formRegis form" enctype="multipart/form-data">
 
       <div class="form-floating mb-3">
         <input type="text" name="palabra" class="form-control" id="floatingInput" placeholder="Nombre completo">
@@ -52,7 +52,7 @@ require_once "../db/conexion.php";
       </div>
 
       <div class="input-group mb-3">
-        <input type="file" class="form-control" name="imagen_palabra" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+        <input type="file" class="form-control" name="imagen" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
         <!-- <button class="btn btn-outline-primary" type="button" id="inputGroupFileAddon04">Añadir</button> -->
       </div>
 
