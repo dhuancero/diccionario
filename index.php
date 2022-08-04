@@ -82,11 +82,13 @@ cabecera("Diccionario Paula");
               <img src="img/<?php echo $palabra['imagen'] ?>" width="500" class="card-img-top" alt="Aqu´i va una imagen relacionada con la palabra">
               <p class="id-cod">ID:<?php echo $palabra['id'] ?></p>
               <h2 class="card-title"><?php echo $palabra['palabra'] ?></h2>
-              <p class="card-text"><?php echo $palabra['descripcion'] ?></p>
+              <p class="card-text "><?php echo $palabra['descripcion'] ?></p>
             </div>
             <div>
-              Personajes:
-              Aquí se muestra el personaje o los personajes que intervienen en la viñeta.
+              <?php
+              include("components/verPersonajes.php");
+              verPersonaje($palabra['id']);
+              ?>
             </div>
             <!-- </div> -->
           </div>
