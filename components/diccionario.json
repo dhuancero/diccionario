@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "palabra": "abajo",
+    "imagen": "/",
+    "descripcion": "En este dibujo el sol está arriba, el puente está en medio y el agua está abajo. ¡Menudo remojón se va a dar el gato!",
+    "personajes": [
+      "Morrongo",
+      "Ranita",
+      "Feuchin"
+    ]
+  },
+  {
+    "id": 2,
+    "palabra": "abrazar",
+    "imagen": "/",
+    "descripcion": "Trini Abraza al Melenas, pero él no se deja abrazar, porque quiere irse a jugar en seguida.",
+    "personajes": [
+      "Trini Rinoceronte",
+      "Jabalí Melenas"
+    ]
+  },
+  {
+    "id": 3,
+    "palabra": "abrigar",
+    "imagen": "/",
+    "descripcion": "Cuando llega el invierno y hace mucho frío, Hilarión se tiene que abrigar",
+    "personajes": [
+      "Caimán Hilarión"
+    ]
+  },
+  {
+    "id": 4,
+    "palabra": "abrir",
+    "imagen": "/",
+    "descripcion": "Fetidón acaba de abrir la puerta, pero ha olvidado cerrarla ¡y todas las moscas entran tras él!",
+    "personajes": [
+      "Mofeta Fetidón"
+    ]
+  },
+  {
+    "id": 5,
+    "palabra": "acabar",
+    "imagen": "/",
+    "descripcion": "Morrongo ha acabado su torre, pero Gatín acabará por echársela al suelo, con lo cual los dos acabarán discutiendo",
+    "personajes": [
+      "Morrongo",
+      "Gatín"
+    ]
+  }
+]
