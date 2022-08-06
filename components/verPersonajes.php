@@ -3,22 +3,16 @@ include_once("../db/conexion.php");
 function verPersonaje($id)
 {
   $rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
-  // echo $rutaLocal; 
 ?>
   <div class="card">
-    <h4>Personajes:</h4>
+    <h4 class="text-secundary card-title text-center">Personajes:</h4>
     <div class="card-body">
       <?php
-      $personaje = "Personaje";
       $db = conexion();
+      $id = addslashes($id);
 
       $sql = "SELECT P.id, P.nombre FROM personaje P INNER JOIN relacion R ON P.id = R.id_personaje WHERE R.id_palabra = $id";
-      /* $sentencia = $db->prepare($sql);
-      $sentencia->bind_param("i", intval($id));
-      $sentencia->execute();
-      $resultado = $sentencia->get_result();
-      # Obtenemos solo una fila, que será la palabra a mostrar
-      $personaje = $resultado->fetch_assoc(); */
+
       $resultado = $db->query($sql);
       $personaje = $resultado->fetch_all(MYSQLI_ASSOC);
 
@@ -27,7 +21,7 @@ function verPersonaje($id)
       }
       foreach ($personaje as $value) {
       ?>
-        <a href="<?php echo $rutaLocal ?>/pages/palabras.php?id=<?php echo $value['id'] ?>" class="card-link"><?php echo $value['nombre'] ?></a>
+        <a href="<?php echo $rutaLocal ?>/pages/palabras.php?id=<?php echo $value['id'] ?>" class="card-link text-decoration-none text-center"><?php echo $value['nombre'] ?></a>
       <?php
       }
       $db->close();

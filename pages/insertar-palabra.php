@@ -37,6 +37,8 @@ require_once "../db/conexion.php";
     if (isset($_GET['msj'])) {
       if ($_GET['msj'] == 'errorReg') {
         echo "Tiene que rellenar todos los campos";
+      } else if ($_GET['msj'] == 'ok') {
+        echo "Los campos han sido añadidos correctamente";
       }
     }
     ?>
@@ -61,9 +63,9 @@ require_once "../db/conexion.php";
         <select class="form-select personaje-select" name="states[]" multiple="multiple" id="id_label_multiple">
           <!-- <option value="vacio">Selecciona personaje/s:</option> -->
           <?php
-          $conn = conexion();
+          $db = conexion();
           $sql = "SELECT * FROM personaje";
-          $resultado = $conn->query($sql);
+          $resultado = $db->query($sql);
           $personajes = $resultado->fetch_all(MYSQLI_ASSOC);
           foreach ($personajes as $personaje) { ?>
             <option value="<?php echo $personaje['id'] ?>"><?php echo $personaje['nombre'] ?></option>

@@ -10,19 +10,21 @@ require_once "../db/conexion.php";
 <html lang="es">
 <?php
 cabecera("Personajes");
+$rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
+
 ?>
 
 <body>
   <header>
     <nav class="navbar navbar-dark bg-dark ">
       <div class="container-fluid ">
-        <a class="navbar-brand" href="../">MI PRIMER DICCIONARIO</a>
+        <a class="navbar-brand" href="<?php echo $rutaLocal ?>/">MI PRIMER DICCIONARIO</a>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link text-light" href="../">Inicio</a>
+            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="#">Personajes</a>
+            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/pages/personajes.php">Personajes</a>
           </li>
         </ul>
 
@@ -52,7 +54,7 @@ cabecera("Personajes");
                 <h5 class="card-title pb-2 title-personaje"><?php echo $personaje['nombre'] ?></h5>
                 <h6 class="card-subtitle mb-2 text-muted"><?php $personaje['id'] ?></h6>
                 <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                <a href="palabras.php?id=<?php echo $personaje['id'] ?>" class="btn btn-sm text-center btn-outline-primary mr-2">Ver Palabras</a>
+                <a href="palabras.php?id=<?php echo $personaje['id'] ?>" class="btn btn-sm text-center btn-outline-danger mr-2">Ver Palabras</a>
               </div>
             </div>
           </div>

@@ -3,40 +3,99 @@ session_start();
 if (isset($_SESSION['username'])) {
   $sesicion_username = $_SESSION['username'];
 }
-include_once "../components/head.php";
-require_once "../db/conexion.php";
+$rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
+
+include_once("../components/head.php");
+include_once("../db/conexion.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <?php
 cabecera("Palabras");
+
 ?>
 
 <body>
   <header>
     <nav class="navbar navbar-dark bg-dark ">
       <div class="container-fluid ">
-        <a class="navbar-brand" href="../">MI PRIMER DICCIONARIO</a>
+        <a class="navbar-brand" href="<?php echo $rutaLocal ?>/">MI PRIMER DICCIONARIO</a>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link text-light" href="../">Inicio</a>
+            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="personajes.php">Personajes</a>
+            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/pages/personajes.php">Personajes</a>
           </li>
         </ul>
 
-        <?php include_once "../components/sesion.php"; ?>
+        <?php include_once("../components/sesion.php"); ?>
         <!-- Aquí va inicio de sesion -->
       </div>
     </nav>
   </header>
   <main class="container">
     <?php
-    $conn = conexion();
-
+    $db = conexion();
+    if (isset($_GET['id'])) {
+      $db = conexion();
+      if (!is_numeric($_GET['id'])) {
+        exit("No es un número");
+      }
+      $idPersonaje = $_GET['id'];
+      //!-------------------------------------------------------------
+      //! Obtenemos nombre del personaje.
+      //!-------------------------------------------------------------
+      $sqlPersonaje = "SELECT * FROM personaje WHERE id = ?";
+      $sentencia = $db->prepare($sqlPersonaje);
+      $sentencia->bind_param("i", intval($idPersonaje));
+      $sentencia->execute();
+      $resulPersonaje = $sentencia->get_result();
+      # Obtenemos solo una fila, que será la palabra a mostrar
+      $personajeDatos = $resulPersonaje->fetch_assoc();
+      if (!$personajeDatos) {
+        exit("No hay resultados para esa palabra");
+      }
     ?>
+      <div class="row mt-3">
+        <h3 class="text-center text-danger"><?php echo $personajeDatos['nombre'] ?></h3>
+      </div>
+
+      <div class="row mt-3">
+
+        <?php
+        //!-------------------------------------------------------------
+        //! Obtenemos las palabras relacionadas con los personajes.
+        //!-------------------------------------------------------------
+
+        $sqlPalabra = "SELECT W.id, W.palabra, W.imagen, W.descripcion FROM palabras W INNER JOIN relacion R ON W.id = R.id_palabra WHERE R.id_personaje = $idPersonaje";
+        $resultado = $db->query($sqlPalabra);
+        $personaje = $resultado->fetch_all(MYSQLI_ASSOC);
+        foreach ($personaje as $person) {
+        ?>
+          <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem;">
+              <a href="#">
+                <img src="<?php echo $rutaLocal ?>/img/<?php echo $person['imagen'] ?>" class="card-img-top" alt="Aquí va la imagen del personaje">
+              </a>
+              <div class="card-body text-center">
+                <h5 class="card-title pb-2 title-personaje"><?php echo $person['palabra'] ?></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><?php $person['id'] ?></h6>
+                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                <a href="palabras.php?id=<?php echo $personaje['id'] ?>" class="btn btn-sm text-center btn-outline-danger mr-2">Ver Palabras</a>
+              </div>
+            </div>
+          </div>
+      </div>
+
+  <?php
+        }
+        $db->close();
+      } else {
+        exit(header("Location: " . $rutaLocal));
+      }
+  ?>
 
   </main>
 

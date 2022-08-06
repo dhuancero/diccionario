@@ -6,6 +6,8 @@ include_once "../components/head.php";
 <html lang="es">
 <?php
 cabecera("Registrar");
+$rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
+
 ?>
 
 <body>
@@ -13,17 +15,17 @@ cabecera("Registrar");
   <header>
     <nav class="navbar navbar-dark bg-dark ">
       <div class="container-fluid ">
-        <a class="navbar-brand" href="./">MI PRIMER DICCIONARIO</a>
+        <a class="navbar-brand" href="<?php echo $rutaLocal ?>/">MI PRIMER DICCIONARIO</a>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link text-light" href="../">Inicio</a>
+            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="./personajes.php">Personajes</a>
+            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/personajes.php">Personajes</a>
           </li>
         </ul>
 
-        <?php include_once "../components/sesion.php"; ?>
+        <?php include_once("../components/sesion.php"); ?>
         <!-- Aquí va inicio de sesion -->
       </div>
     </nav>

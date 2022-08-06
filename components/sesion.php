@@ -1,6 +1,8 @@
 <!-- Botón Inicio Sesión: -->
 <!-- <section class="login"> -->
-<?php if (isset($sesicion_username)) { ?>
+<?php if (isset($sesicion_username)) {
+  $rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
+?>
   <section class="navbar navbar-expand-lg bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" aria-current="page" href="#"></a>
@@ -12,22 +14,22 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Configuración</a></li>
-              <li><a class="dropdown-item" href="#">Editar Personaje</a></li>
+              <li><a class="dropdown-item" href="<?php echo $rutaLocal ?>/pages/editaPersonaje.php">Editar Personaje</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="./pages/insertar-palabra.php">Insertar palabra</a></li>
+              <li><a class="dropdown-item" href="<?php echo $rutaLocal ?>/pages/insertar-palabra.php">Insertar palabra</a></li>
             </ul>
           </li>
         </ul>
-        <form class="d-flex" role="search" method="post" action="./components/cerrarSesion.php">
+        <form class="d-flex" role="search" method="post" action="<?php echo $rutaLocal ?>/components/cerrarSesion.php">
           <button class="btn btn-sm btn-danger text-light" name="cerrarSesion" type="submit">Cerrar Sesión</button>
         </form>
       </div>
     </div>
   </section>
 <?php } else { ?>
-  <form method="post" action="./pages/login.php" class="form">
+  <form method="post" action="<?php echo $rutaLocal ?>/pages/login.php" class="form">
     <div>
       <input type="submit" name="inicioSesion" class="btn btn-sm btn-primary" value="Iniciar Sesion">
     </div>

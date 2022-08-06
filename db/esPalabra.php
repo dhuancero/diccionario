@@ -95,7 +95,7 @@ if (isset($_POST["registrar"])) {
     $inser_relacion->execute();
     if ($inser_relacion) {
       echo "Todo ha salido bien <br>";
-      // header("Location: ../pages/insertar-palabra.php?msj=ok");
+      header("Location: ../pages/insertar-palabra.php?msj=ok");
     } else {
       echo "No se ha podido insertar registro";
     }
