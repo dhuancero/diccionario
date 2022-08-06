@@ -4,16 +4,13 @@ if (isset($_SESSION['username'])) {
   $sesicion_username = $_SESSION['username'];
 }
 $rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
-
-include_once("../components/head.php");
 include_once("../db/conexion.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <?php
+include_once("../components/head.php");
 cabecera("Palabras");
-
 ?>
 
 <body>
@@ -29,12 +26,12 @@ cabecera("Palabras");
             <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/pages/personajes.php">Personajes</a>
           </li>
         </ul>
-
-        <?php include_once("../components/sesion.php"); ?>
         <!-- Aquí va inicio de sesion -->
+        <?php include_once("../components/sesion.php"); ?>
       </div>
     </nav>
   </header>
+
   <main class="container">
     <?php
     $db = conexion();
@@ -58,44 +55,52 @@ cabecera("Palabras");
         exit("No hay resultados para esa palabra");
       }
     ?>
-      <div class="row mt-3">
-        <h3 class="text-center text-danger"><?php echo $personajeDatos['nombre'] ?></h3>
+      <div class="row my-4 ">
+        <div class="col-md-5 align-items-center">
+          <h2 class="text-center my-4 text-danger text-uppercase"><?php echo $personajeDatos['nombre'] ?></h2>
+        </div>
+        <div class="col-md-5 align-items-center">
+          <?php if (isset($person)) {
+          } ?>
+          <img src="<?php echo $rutaLocal ?>/img/avatar/avatar2.jpg<?php $personajeDatos['nombre'] ?>" class="card-img-top" height=300 alt="Aquí va la imagen del personaje">
+        </div>
       </div>
+      <hr>
 
-      <div class="row mt-3">
-
-        <?php
-        //!-------------------------------------------------------------
-        //! Obtenemos las palabras relacionadas con los personajes.
-        //!-------------------------------------------------------------
-
-        $sqlPalabra = "SELECT W.id, W.palabra, W.imagen, W.descripcion FROM palabras W INNER JOIN relacion R ON W.id = R.id_palabra WHERE R.id_personaje = $idPersonaje";
-        $resultado = $db->query($sqlPalabra);
-        $personaje = $resultado->fetch_all(MYSQLI_ASSOC);
-        foreach ($personaje as $person) {
-        ?>
-          <div class="col-md-4 mb-3">
-            <div class="card" style="width: 18rem;">
-              <a href="#">
-                <img src="<?php echo $rutaLocal ?>/img/<?php echo $person['imagen'] ?>" class="card-img-top" alt="Aquí va la imagen del personaje">
-              </a>
-              <div class="card-body text-center">
-                <h5 class="card-title pb-2 title-personaje"><?php echo $person['palabra'] ?></h5>
-                <h6 class="card-subtitle mb-2 text-muted"><?php $person['id'] ?></h6>
-                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                <a href="palabras.php?id=<?php echo $personaje['id'] ?>" class="btn btn-sm text-center btn-outline-danger mr-2">Ver Palabras</a>
+      <!-- !------------------------------------------------------------- -->
+      <!-- Obtenemos las palabras relacionadas con los personajes. -->
+      <!--------------------------------------------------------------- -->
+      <div class="container mx-auto mt-4">
+        <div class="row">
+          <?php
+          $sqlPalabra = "SELECT W.id, W.palabra, W.imagen, W.descripcion FROM palabras W INNER JOIN relacion R ON W.id = R.id_palabra WHERE R.id_personaje = $idPersonaje";
+          $resultado = $db->query($sqlPalabra);
+          $personaje = $resultado->fetch_all(MYSQLI_ASSOC);
+          foreach ($personaje as $person) {
+          ?>
+            <div class="col-md-4 mb-3">
+              <div class="card" style="width: 18rem;">
+                <a href="#">
+                  <img src="<?php echo $rutaLocal ?>/img/<?php echo $person['imagen'] ?>" class="card-img-top" alt="Aquí va la imagen del personaje">
+                </a>
+                <div class="card-body text-center">
+                  <h3 class="card-title pb-2 title-personaje"><?php echo $person['palabra'] ?></h3>
+                  <!-- <a href="palabras.php?id=<?php echo $personaje['id'] ?>" class="btn btn-sm text-center btn-outline-danger mr-2">Ver Palabras</a> -->
+                </div>
               </div>
             </div>
-          </div>
+          <?php
+          }
+          ?>
+        </div>
       </div>
+    <?php
 
-  <?php
-        }
-        $db->close();
-      } else {
-        exit(header("Location: " . $rutaLocal));
-      }
-  ?>
+      $db->close();
+    } else {
+      exit(header("Location: " . $rutaLocal));
+    }
+    ?>
 
   </main>
 
