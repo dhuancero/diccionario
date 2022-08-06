@@ -13,12 +13,18 @@
               <?php echo $sesicion_username; ?>
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Configuración</a></li>
-              <li><a class="dropdown-item" href="<?php echo $rutaLocal ?>/pages/editaPersonaje.php">Editar Personaje</a></li>
+              <li>
+                <a class="dropdown-item" href="<?php echo $rutaLocal ?>/administrar">Configuración</a>
+              </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="<?php echo $rutaLocal ?>/pages/insertar-palabra.php">Insertar palabra</a></li>
+              <li>
+                <a class="dropdown-item" href="<?php echo $rutaLocal ?>/pages/editaPersonaje.php">Editar Personaje</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="<?php echo $rutaLocal ?>/pages/insertar-palabra.php">Insertar palabra</a>
+              </li>
             </ul>
           </li>
         </ul>
