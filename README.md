@@ -1,0 +1,2 @@
+# Diccionario 
+Digitalización del diccionario 
