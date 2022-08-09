@@ -41,7 +41,7 @@ cabecera("Diccionario Paula");
 
 
   <!-- HEADER FIN -->
-  <main class="container ">
+  <main class="container">
 
     <div class="row d-flex justify-content-center align-items-start mt-3 ">
       <div class="col-md-5 mt-3">
