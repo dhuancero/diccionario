@@ -14,7 +14,7 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item" href="<?php echo $rutaLocal ?>/administrar">Configuración</a>
+                <a class="dropdown-item" href="<?php echo $rutaLocal ?>/admin">Configuración</a>
               </li>
               <li>
                 <hr class="dropdown-divider">
