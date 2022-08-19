@@ -3,8 +3,8 @@ session_start();
 if (isset($_SESSION['username'])) {
   $sesicion_username = $_SESSION['username'];
 }
-include_once "../components/head.php";
-require_once "../db/conexion.php";
+include_once "./components/head.php";
+require_once "./db/conexion.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,24 +15,11 @@ $rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
 ?>
 
 <body>
-  <header>
-    <nav class="navbar navbar-dark bg-dark ">
-      <div class="container-fluid ">
-        <a class="navbar-brand" href="<?php echo $rutaLocal ?>/">MI PRIMER DICCIONARIO</a>
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/pages/personajes.php">Personajes</a>
-          </li>
-        </ul>
-
-        <?php include_once "../components/sesion.php"; ?>
-        <!-- Aquí va inicio de sesion -->
-      </div>
-    </nav>
-  </header>
+  <!-- HEADER -->
+  <?php
+  include_once("./components/header.php");
+  ?>
+  <!-- HEADER FIN -->
   <main class="container">
     <h1 class="text-center my-4">Personajes</h1>
     <div class="container mx-auto mt-4">
@@ -54,7 +41,7 @@ $rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
                 <h5 class="card-title pb-2 title-personaje"><?php echo $personaje['nombre'] ?></h5>
                 <h6 class="card-subtitle mb-2 text-muted"><?php $personaje['id'] ?></h6>
                 <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                <a href="palabras.php?id=<?php echo $personaje['id'] ?>" class="btn btn-sm text-center btn-outline-danger mr-2">Ver Palabras</a>
+                <a href="ver-personaje.php?id=<?php echo $personaje['id'] ?>" class="btn btn-sm text-center btn-outline-danger mr-2">Ver Palabras</a>
               </div>
             </div>
           </div>

@@ -41,7 +41,7 @@ $rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
         echo "iniciaste sesion:" . $sesicion_username;
       } else {
     ?>
-        <form action="../db/esLogin.php" method="post" class="formLogin form">
+        <form action="./config/esLogin.php" method="post" class="formLogin form">
           <label for="user" class="form-label"> USUARIO:
             <input type="text" class="form-control" name="user" id="user">
           </label>

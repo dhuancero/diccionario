@@ -4,34 +4,22 @@ if (isset($_SESSION['username'])) {
   $sesicion_username = $_SESSION['username'];
 }
 $rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
-include_once("../db/conexion.php");
+include_once("./db/conexion.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <?php
-include_once("../components/head.php");
+include_once("./components/head.php");
 cabecera("Palabras");
 ?>
 
 <body>
-  <header>
-    <nav class="navbar navbar-dark bg-dark ">
-      <div class="container-fluid ">
-        <a class="navbar-brand" href="<?php echo $rutaLocal ?>/">MI PRIMER DICCIONARIO</a>
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/pages/personajes.php">Personajes</a>
-          </li>
-        </ul>
-        <!-- Aquí va inicio de sesion -->
-        <?php include_once("../components/sesion.php"); ?>
-      </div>
-    </nav>
-  </header>
-
+  <!-- HEADER -->
+  <?php
+  include_once("./components/header.php");
+  ?>
+  <!-- HEADER FIN -->
+  <!-- MAIN INICIO -->
   <main class="container">
     <?php
     $db = conexion();

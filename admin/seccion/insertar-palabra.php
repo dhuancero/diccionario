@@ -1,4 +1,6 @@
 <?php
+$rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario/admin";
+
 session_start();
 if (isset($_SESSION['username'])) {
   $sesicion_username = $_SESSION['username'];
@@ -6,31 +8,14 @@ if (isset($_SESSION['username'])) {
   header("Location: ../index.php");
 }
 include_once "../components/head.php";
-require_once "../db/conexion.php";
+require_once "../config/conexion.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <?php cabecera("Insertar Palabra"); ?>
 
 <body>
-  <header>
-    <nav class="navbar navbar-dark bg-dark ">
-      <div class="container-fluid ">
-        <a class="navbar-brand" href="../">MI PRIMER DICCIONARIO</a>
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link text-light" href="../">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="personajes.php">Personajes</a>
-          </li>
-        </ul>
-
-        <?php include_once "../components/sesion.php"; ?>
-        <!-- Aquí va inicio de sesion -->
-      </div>
-    </nav>
-  </header>
+  <?php include_once("../components/header.php") ?>
   <main class="container my-5" style="width:50%;">
     <h1 class="text-center my-4">Insertar Palabra</h1>
     <?php
@@ -42,7 +27,7 @@ require_once "../db/conexion.php";
       }
     }
     ?>
-    <form action="../db/esPalabra.php" method="post" class="formRegis form" enctype="multipart/form-data">
+    <form action="../config/esPalabra.php" method="post" class="formRegis form" enctype="multipart/form-data">
 
       <div class="form-floating mb-3">
         <input type="text" name="palabra" class="form-control" id="floatingInput" placeholder="Nombre completo">

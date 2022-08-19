@@ -10,37 +10,21 @@ require_once "db/conexion.php";
 <html lang="es">
 <?php
 cabecera("Diccionario Paula");
+$db = conexion();
 ?>
 
 <body>
   <?php
   // establecemos la conexión
-  $db = conexion();
   $rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario";
   ?>
-
   <!-- HEADER -->
-  <header>
-    <nav class="navbar navbar-dark bg-dark ">
-      <div class="container-fluid ">
-        <a class="navbar-brand" href="<?php echo $rutaLocal ?>">MI PRIMER DICCIONARIO</a>
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="<?php echo $rutaLocal ?>/pages/personajes.php">Personajes</a>
-          </li>
-        </ul>
-
-        <?php include_once("./components/sesion.php"); ?>
-        <!-- Aquí va inicio de sesion -->
-      </div>
-    </nav>
-  </header>
-
-
+  <?php
+  include_once("./components/header.php");
+  ?>
   <!-- HEADER FIN -->
+
+  <!-- MAIN INICIO -->
   <main class="container">
 
     <div class="row d-flex justify-content-center align-items-start mt-3 ">

@@ -1,5 +1,5 @@
 <?php
-include_once "../functions/functions.php";
+// include_once "../functions/functions.php";
 include_once "conexion.php";
 
 if (isset($_POST["registrar"])) {
@@ -16,7 +16,7 @@ if (isset($_POST["registrar"])) {
 
   //! Comprobamos que los campos tienen contenido
   if ($palabra === "" || $descripcion === "" || $numPersonajes === "") {
-    exit(header("Location: ../pages/insertar-palabra.php?msj=errorReg"));
+    exit(header("Location: ../seccion/insertar-palabra.php?msj=errorReg"));
   }
 
   // TODO: Comprobar si la palabra ya ha sido intprducida. 
@@ -95,7 +95,7 @@ if (isset($_POST["registrar"])) {
     $inser_relacion->execute();
     if ($inser_relacion) {
       echo "Todo ha salido bien <br>";
-      header("Location: ../pages/insertar-palabra.php?msj=ok");
+      header("Location: ../seccion/insertar-palabra.php?msj=ok");
     } else {
       echo "No se ha podido insertar registro";
     }

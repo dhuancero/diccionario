@@ -4,10 +4,12 @@ if (isset($_SESSION['username'])) {
   $sesicion_username = $_SESSION['username'];
 }
 // include_once "../components/head.php";
-require_once "conexion.php";
+require_once "../../db/conexion.php";
 include_once "../components/header.php";
+$rutaLocal = "http://" . $_SERVER["HTTP_HOST"] . "/diccionario/admin";
 
 if (isset($_POST["btnAcceder"])) {
+
   $user = $_POST["user"];
   $pass = $_POST["pass"];
   $conn = conexion();
@@ -25,10 +27,10 @@ if (isset($_POST["btnAcceder"])) {
   if ($esPass) {
     echo "El usuario es correcto.";
     $_SESSION["username"] = $userOk['nombre'];
-    header("Location: ../index.php?registrado");
+    header("Location: $rutaLocal");
   }
 } else if (isset($_POST["btnCrear"])) {
-  header("Location: ../pages/registrar.php");
+  header("Location: $rutaLocal/seccion/registrar.php");
 } else {
-  header("Location: ../index.php");
+  header("Location: $rutaLocal");
 }
